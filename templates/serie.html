@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>ISDB - Séries, NETFLIX e Celebridades</title>
+      <link rel="icon" href="imgs/favicon.ico" type="image/x-icon">
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/css/estilo.css" rel="stylesheet">
+
+  </head>
+  <body data-spy="scroll" data-target=".menu-navegacao" data-offset="100">
+<!-- ------------------------------------------------------------------------------------------------------ -->
+
+<!-- ------------------------------------------  Menu da aplicação ---------------------------------------- -->
+      <nav class="navbar navbar-inverse navbar-fixed-top navbar-transparente" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navegacao">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="" class="navbar-brand img-logo"></a>
+            </div>
+
+            <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
+
+                <form class="navbar-form navbar-right" role="search">
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </span>
+                            <input type="text" class="form-control" placeholder="Busca...">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-primary">Buscar</button>
+                        </span>
+                    </div>
+                </form>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#page-top"></a></li>
+                    <li><a class="" href="">voltar</a></li>
+                    <li><a class="" href="series">Séries</a></li>
+                    <li><a class="" href="artistas">Artistas</a></li>
+                    <li><a class="" href="netflix.html">Netflix</a></li>
+                </ul>
+            </div>
+        </div>
+      </nav>
+<!-- --------------------------------------------------------------------------------------------------- -->
+
+<!-- ----------------------------------------- banner de artistas -------------------------------------- -->
+
+      <section id="artistas">
+          <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-header"><h1>{{serie.nome}} <small></small></h1></div>
+                </div>
+            </div>
+              <br>
+
+<!-- --------------------------------------- Banner Serie ------------------------------------------------- -->
+                <div class="row artista_row">
+                    <div class="col-md-12" align="center">
+                        <a href="temporada?idserie={{serie.idserie}}"><img src="{{serie.banner}}" class="img-responsive"></a><br><br><br>
+                    </div>
+                    <div class="col-md-12" align="left">
+                        <h2>Sinopse: </h2><hr>
+                        <h3> {{serie.sinopse}}"</h3><br /><br /><br /><br /><br /><br /><br />
+                    </div>
+
+                    <br>
+                </div>
+<!-- -------------------------------------- Artistas relacionados ------------------------------------------ -->
+
+                    <h2>Artistas relacionados</h2><hr>
+                        <div class="col-xs-12">
+                         <div class="artista_item">
+                             {% for ator in elenco [0:4]%}
+                                 <div class="col-md-3 series_item series_row">
+                                   <a href="artista?idator={{ator.idator}}"><div><img src="{{ator.foto}}" class="img-responsive img-rounded"/></div></a>
+                                    <h4>{{ ator.nome }}</h4>
+                                </div>
+                             {% endfor %}
+                             <div class="col-xs-12">
+                                 {% for ator in elenco [4:8]%}
+                                     <div class="col-md-3 series_item series_row">
+                                       <a href="artista?idator={{ator.idator}}"><div><img src="{{ator.foto}}" class="img-responsive img-rounded"/></div></a>
+                                        <h4>{{ ator.nome }}</h4>
+                                    </div>
+                                 {% endfor %}
+                             </div>
+                             <div class="col-xs-12">
+                                 {% for ator in elenco [8:12]%}
+                                     <div class="col-md-3 series_item series_row">
+                                       <a href="artista?idator={{ator.idator}}"><div><img src="{{ator.foto}}" class="img-responsive img-rounded"/></div></a>
+                                        <h4>{{ ator.nome }}</h4>
+                                    </div>
+                                 {% endfor %}
+                             </div>
+                             <div class="col-xs-12">
+                                 {% for ator in elenco [12:16]%}
+                                     <div class="col-md-3 series_item series_row">
+                                       <a href="artista?idator={{ator.idator}}"><div><img src="{{ator.foto}}" class="img-responsive img-rounded"/></div></a>
+                                        <h4>{{ ator.nome }}</h4>
+                                    </div>
+                                 {% endfor %}
+                             </div>
+
+                    </div>
+                </div>
+              <br /><br />
+
+              <h2>Temporadas</h2><hr>
+                   <div class="col-xs-12">
+                      {% for temp in temporada %}
+                          <div class="col-md-3 series_item series_row">
+                              <a href="temporada?idtemporada={{temp.idtemporada}}&idserie={{serie.idserie}}"><div><img src="{{temp.banner}}" class="img-responsive img-rounded"/></div></a>
+                                  <h4>{{ temp.ano }}</h4>
+                          </div>
+                      {% endfor %}
+                   </div>
+          </div>
+      </section>
+<!-- --------------------------------------- // banner de artistas -------------------------------------- -->
+
+<!-- ---------------------------------------------- Sumário --------------------------------------------- -->
+
+<!-- -------------------------------------------- // Sumário -------------------------------------------- -->
+<hr />
+<!-- ---------------------------------------- Cadastro de Temporada --------------------------------------- -->
+
+      <section id="cadastro" class="div_colorida">
+          <div class="container">
+              <div class="row clearfix">
+                  <div class="col-md-12 column">
+                      <div class="page-header">
+                        <h1>Temporada <small><i> sentiu a falta de alguma temporada? Seja um colaborador.. adicione mais informações</i></small></h1>
+                      </div>
+                  </div>
+                  <div class="col-md-12 column">
+                      <div class="jumbotron">
+                        <div class="row cadastro">
+                            <div class="col-xs-12">
+
+                                <form action="cadastraserie" class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Selecione a serie: </label>
+                                                <select name="idserie">
+                                                    <option value="{{serie.idserie}}"> {{serie.nome}}</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Ano de estreia? </label>
+                                                <input type="text" class="form-control input-lg" name="ano" placeholder="2018" required>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label>Banner: </label>
+					                            <input class="textarea" type="text" name="banner" placeholder="Utilize http://goo.gl/ para reduzir o link">
+                                            </div>
+                                        </div>
+                                            <div class="form-group col-md-6">
+                                                <label>sinopse: </label>
+                                                <textarea class="form-control input-lg" name="sinopse" style="width: 506px; height: 223px;" required ></textarea>
+                                                <br />
+                                            </div>
+
+                                        </div>
+                                    <div class="row">
+                                        <!-- <div class="col-sm-6">
+                                            <div class="alert alert-success">Envio realizado!</div>
+                                        </div>
+                                        -->
+                                        <br />
+                                        <div class="col-sm-12">
+                                            <button type="submit" class="btn btn-success btn-lg">Enviar Formulário</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+     </section>
+<!-- ------------------------------------ // Cadastro de artista --------------------------------------- -->
+
+<!-- ----------------------------------- rodapé com informações gerais---------------------------------- -->
+    <!-- Rodape -->
+    <footer id="rodape">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-2">
+            <span class="img-logo">ISDB</span>
+          </div>
+            <div class="col-md-8">
+                <ul class="nav">
+                    <div class="col-md-2">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/facebook.png"></a></li>
+                    </div>
+                    <div class="col-md-2">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/twitter.png"></a></li>
+                    </div>
+                    <div class="col-md-1">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/instagram.png"></a></li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="col-md-2 text-right nav">
+                <small>Desenvolvido por:</small><br/>
+                <strong>Jefté Alves Lira de Araujo</strong>
+            </div>
+
+        </div><!-- /row -->
+      </div>
+    </footer>
+
+<!-- ------------------------------ // barra de informações gerais --------------------------------------- -->
+
+<!-- ----------------------------------------------------------------------------------------------------- -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+      <script src="../static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+  </body>
+</html>

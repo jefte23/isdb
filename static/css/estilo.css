@@ -1,0 +1,135 @@
+/* css personalizado */
+
+* {
+  font-family: 'Lato', sans-serif;  
+  font-weight: 300;
+}
+body {
+    padding-top: 50px;
+}
+.navbar-brand{
+    font-weight: 700;
+}
+.divslider{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: linear-gradient(50deg, #BDBDBD, #58ACFA);
+}
+nav.navbar-transparente {
+	/*padding: 15px 0px;*/
+	background: rgba(0, 0, 0, 0.5);
+	border: none;
+}
+
+section{
+    padding-top: 20px;
+    padding-bottom: 15px;
+    min-height: 100vh;
+}
+
+section#cadastro {
+    min-height: 80vh;   
+}
+
+img.grayscale {
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 3.5+ */
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+}
+
+img.grayscale:hover {
+  filter: none;
+  -webkit-filter: grayscale(0%);
+}
+
+.navbar-brand {
+   font-weight: 700;
+} 
+
+
+.div_colorida{
+    background: linear-gradient(50deg, #BDBDBD, #58ACFA);
+}
+
+.series_item * {
+    text-align: center;
+}
+
+.series_item h4{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.servicos_btn_todaseries {
+    margin-top: 25px;
+}
+.series_row{
+    margin-bottom: 20px
+}
+.artista_item{
+    /*background: white;*/
+}
+.artista_row{
+    margin-bottom: 20px
+}
+
+.artista_item h4{
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.contato textarea{
+    height: 170px;   
+}
+
+.contato .aviso {
+   padding: 15px; 
+}  
+/* -- rodape -- */
+footer {
+    background: rgba(0, 0, 0, 0.7);
+	padding: 50px 0px 20px 0px;
+	position: relative;
+}
+
+.img-logo {
+	height: 50px;
+	width: 132px;
+    display: block;
+	background: url('../imgs/Logo.png') no-repeat;
+	background-size: contain;
+	color: transparent;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
