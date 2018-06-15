@@ -167,6 +167,8 @@ def cadastraAvaliacao(file, idserie, nome, avaliacao, avatar):
     cursor.execute(query)
     connection.commit()
 
+#----------------------------------------------------------------------------#
+
 def buscaAvaliacao(file, idserie):
 
     connection, cursor = connection_dao.get_connection(file)
@@ -190,8 +192,9 @@ def buscaAvaliacao(file, idserie):
 
     return avaliacao
 
+#----------------------------------------------------------------------------#
 
-def excluiAvaliação(file, idserie):
+def excluiAvaliacao(file, idserie):
 
     connection, cursor = connection_dao.get_connection(file)
 

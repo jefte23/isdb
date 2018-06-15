@@ -34,19 +34,22 @@ def artista():
     trabalhos = elenco_dao.get_trabalho(mysql, idator)
     todaSeries = serie_dao.get_series(mysql)
 
+
+
     series = []
     for tr in trabalhos:
         sr = serie_dao.get_serie(mysql, tr.idserie)
-        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
 
         series.append(sr)
+
+
 
     if series == []:
         temporadas = []
         return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
     else:
-        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
+        temporadas = temporada_dao.buscaTemporadaV2(mysql, idator)
         return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
 
@@ -58,12 +61,6 @@ def cadastrarArtista():
     datanascimento = request.args.get('datanascimento')
     nascionalidade = request.args.get('nascionalidade')
     foto = request.args.get('foto')
-
-    print("nome :", nome)
-    print("biografia :", biografia)
-    print("datanascimento :", datanascimento)
-    print("nascionalidade :", nascionalidade)
-    print("foto :", foto)
 
     elenco_dao.cadastrar_ator(mysql, nome, biografia, datanascimento, nascionalidade, foto)
 
@@ -83,7 +80,6 @@ def cadastroTrabalho():
 
     elenco_dao.get_cadastraTrabalho(mysql, idator, idserie, idtemporada)
 
-    idator = request.args.get('idator')
     artista = elenco_dao.get_ator(mysql, idator)
     trabalhos = elenco_dao.get_trabalho(mysql, idator)
     todaSeries = serie_dao.get_series(mysql)
@@ -94,12 +90,13 @@ def cadastroTrabalho():
 
         series.append(sr)
 
+
     if series == []:
         temporadas = []
         return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
     else:
-        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
+        temporadas = temporada_dao.buscaTemporadaV2(mysql, idator)
         return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
 

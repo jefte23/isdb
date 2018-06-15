@@ -13,16 +13,25 @@ def atualizarTemporada():
     temporada_dao.atualizaTemporada(mysql, idtemporada, ano, sinopse, banner)
 
     serie = serie_dao.get_serie(mysql, idserie)
-    trabalho = elenco_dao.get_elencoSerie(mysql, idserie)
-    temporada = temporada_dao.get_temporadas(mysql, idserie)
+    temporada = temporada_dao.get_temporada(mysql, idtemporada)
+    temporadas = temporada_dao.get_temporadas(mysql, idserie)
+
+    trabalho = elenco_dao.get_elencoSerie(mysql, idtemporada)
+
+    episodios = episodeo_dao.getEpisodeos(mysql, idserie, idtemporada)
+
+    diretor = diretor_dao.get_diretores(mysql)
+    escritor = escritor_dao.get_escritores(mysql)
+
 
     elenco = []
     for el in trabalho:
+        print(el.idator)
         atores = elenco_dao.get_ator(mysql, el.idator)
 
         elenco.append(atores)
 
-    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada)
+    return render_template("temporada.html", temporada = temporada, temporadas = temporadas, episodios = episodios, serie = serie, elenco = elenco, escritor = escritor, diretor = diretor)
 
 @app.route('/cadastraEpisodio')
 def cadastraEpisodio():
@@ -36,19 +45,27 @@ def cadastraEpisodio():
     sinopse = request.args.get('sinopse')
 
 
-    episodeo_dao.cadastra_episodio(mysql, idserie, idtemporada, iddiretor, idescritor, temporada, titulo, data, sinopse)
-
     serie = serie_dao.get_serie(mysql, idserie)
-    trabalho = elenco_dao.get_elencoSerie(mysql, idserie)
-    temporada = temporada_dao.get_temporadas(mysql, idserie)
+    temporada = temporada_dao.get_temporada(mysql, idtemporada)
+    temporadas = temporada_dao.get_temporadas(mysql, idserie)
+
+    trabalho = elenco_dao.get_elencoSerie(mysql, idtemporada)
+
+    episodios = episodeo_dao.getEpisodeos(mysql, idserie, idtemporada)
+
+    diretor = diretor_dao.get_diretores(mysql)
+    escritor = escritor_dao.get_escritores(mysql)
+
 
     elenco = []
     for el in trabalho:
+        print(el.idator)
         atores = elenco_dao.get_ator(mysql, el.idator)
 
         elenco.append(atores)
 
-    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada)
+    return render_template("temporada.html", temporada = temporada, temporadas = temporadas, episodios = episodios, serie = serie, elenco = elenco, escritor = escritor, diretor = diretor)
+
 
 @app.route('/atualizaEpisodio')
 def atualizaEpisodio():
@@ -62,19 +79,27 @@ def atualizaEpisodio():
     data = request.args.get('data')
     sinopse = request.args.get('sinopse')
 
-    episodeo_dao.atualizaEpisodio(mysql, idepisodio, idserie, idtemporada, iddiretor, idescritor, temporada, titulo, data, sinopse)
-
     serie = serie_dao.get_serie(mysql, idserie)
-    trabalho = elenco_dao.get_elencoSerie(mysql, idserie)
-    temporada = temporada_dao.get_temporadas(mysql, idserie)
+    temporada = temporada_dao.get_temporada(mysql, idtemporada)
+    temporadas = temporada_dao.get_temporadas(mysql, idserie)
+
+    trabalho = elenco_dao.get_elencoSerie(mysql, idtemporada)
+
+    episodios = episodeo_dao.getEpisodeos(mysql, idserie, idtemporada)
+
+    diretor = diretor_dao.get_diretores(mysql)
+    escritor = escritor_dao.get_escritores(mysql)
+
 
     elenco = []
     for el in trabalho:
+        print(el.idator)
         atores = elenco_dao.get_ator(mysql, el.idator)
 
         elenco.append(atores)
 
-    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada)
+    return render_template("temporada.html", temporada = temporada, temporadas = temporadas, episodios = episodios, serie = serie, elenco = elenco, escritor = escritor, diretor = diretor)
+
 
 @app.route('/excluirEpisodio')
 def excluirEpisodio ():

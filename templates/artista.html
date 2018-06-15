@@ -121,7 +121,7 @@
                     </div>
                 </div>
               <br /><br /><br /><br />
-
+<!--
               <h2>Trabalhos recentes...</h2><hr><br /><br />
               <div class="row artista_row">
                 {% for serie in series %}
@@ -133,19 +133,19 @@
                     </div>
                 {% endfor %}
             </div>
+-->
 
-<!--
               <div class="row artista_row">
                 {% for temp in temporadas %}
-                    <div class="col-sm-2">
-                        <img src={{temp.banner}} class="img-responsive">
+                    <div class="col-sm-3">
+                        <a href="serie?idserie={{temp.idserie}}"><h4 align="center"><i>{{temp.serie}}</i></h4></a>
+                        <a href="temporada?idserie={{temp.idserie}}&idtemporada={{temp.idtemporada}}"><img src={{temp.banner}} class="img-responsive"></a>
                          <div class="artista_item">
                              <h4>{{temp.ano}}</h4>
                         </div>
                     </div>
                 {% endfor %}
             </div>
--->
 
             </div>
 

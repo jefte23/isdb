@@ -99,7 +99,7 @@ def excluir_diretor(file, iddiretor):
 
     connection, cursor = connection_dao.get_connection(file)
 
-    query = f"DELET FROM isdb.diretor where iddiretor = '{iddiretor}'"
+    query = f"DELETE FROM isdb.diretor where iddiretor = '{iddiretor}'"
 
     cursor.execute(query)
     connection.commit()

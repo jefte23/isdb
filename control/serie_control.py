@@ -159,6 +159,50 @@ def cadastrarComentario():
 
     return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada, avaliacao = avaliacao)
 
+@app.route('/cadastrarNoticia')
+def cadastrarNoticia():
+
+    foto = request.args.get('foto')
+    noticia = request.args.get('noticia')
+
+    netflix_dao.cadastraNoticia(mysql, noticia, foto)
+
+    seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
+    elencoAleatorio = elenco_dao.get_atoresAleatorio(mysql)
+    banner = banner_dao.bannerAleatorio(mysql)
+    dirAleatorio = diretor_dao.diretorAleatorio(mysql)
+    escAleatorio = escritor_dao.escritorAleatorios(mysql)
+    diretores = diretor_dao.get_diretores(mysql)
+    escritores = escritor_dao.get_escritores(mysql)
+    netflix = netflix_dao.netflixAleatoria(mysql)
+
+    return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
+                           banner = banner, diretores = diretores, escritores = escritores,
+                           escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+
+
+@app.route('/excluirNoticia')
+def excluirNoticia():
+
+    idnetflix = request.args.get('idnetflix')
+
+    netflix_dao.excluiNoticia(mysql, idnetflix)
+
+    seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
+    elencoAleatorio = elenco_dao.get_atoresAleatorio(mysql)
+    banner = banner_dao.bannerAleatorio(mysql)
+    dirAleatorio = diretor_dao.diretorAleatorio(mysql)
+    escAleatorio = escritor_dao.escritorAleatorios(mysql)
+    diretores = diretor_dao.get_diretores(mysql)
+    escritores = escritor_dao.get_escritores(mysql)
+    netflix = netflix_dao.netflixAleatoria(mysql)
+
+    return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
+                           banner = banner, diretores = diretores, escritores = escritores,
+                           escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+
+
+
 
 
 

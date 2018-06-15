@@ -142,7 +142,31 @@
 
               <h2>Temporadas</h2><hr>
                    <div class="col-xs-12">
-                      {% for temp in temporada %}
+                      {% for temp in temporada [0:4] %}
+                          <div class="col-md-3 series_item series_row">
+                              <a href="temporada?idtemporada={{temp.idtemporada}}&idserie={{serie.idserie}}"><div><img src="{{temp.banner}}" class="img-responsive img-rounded"/></div></a>
+                                  <h4>{{ temp.ano }}</h4>
+                          </div>
+                      {% endfor %}
+                   </div>
+                                 <div class="col-xs-12">
+                      {% for temp in temporada [4:8] %}
+                          <div class="col-md-3 series_item series_row">
+                              <a href="temporada?idtemporada={{temp.idtemporada}}&idserie={{serie.idserie}}"><div><img src="{{temp.banner}}" class="img-responsive img-rounded"/></div></a>
+                                  <h4>{{ temp.ano }}</h4>
+                          </div>
+                      {% endfor %}
+                   </div>
+                                 <div class="col-xs-12">
+                      {% for temp in temporada [8:12] %}
+                          <div class="col-md-3 series_item series_row">
+                              <a href="temporada?idtemporada={{temp.idtemporada}}&idserie={{serie.idserie}}"><div><img src="{{temp.banner}}" class="img-responsive img-rounded"/></div></a>
+                                  <h4>{{ temp.ano }}</h4>
+                          </div>
+                      {% endfor %}
+                   </div>
+                                 <div class="col-xs-12">
+                      {% for temp in temporada [12:16] %}
                           <div class="col-md-3 series_item series_row">
                               <a href="temporada?idtemporada={{temp.idtemporada}}&idserie={{serie.idserie}}"><div><img src="{{temp.banner}}" class="img-responsive img-rounded"/></div></a>
                                   <h4>{{ temp.ano }}</h4>
@@ -180,7 +204,6 @@
             </div>
            </div>
            <br /><hr>
-
 
            <div class="container">
             <div class="row">

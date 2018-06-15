@@ -19,7 +19,14 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <link href="../static/css/estilo.css" rel="stylesheet">
-      
+      <script>
+            function mostra() {
+            	document.getElementById('conteudo').style.display = 'block';
+            }
+            function esconde() {
+            	document.getElementById('conteudo').style.display = 'none';
+            }
+      </script>
   </head>
   <body data-spy="scroll" data-target=".menu-navegacao" data-offset="100">
 <!-- ------------------------------------------------------------------------------------------------------ -->
@@ -237,22 +244,22 @@
         <!-- Conteúdo das abas -->
         <div class="tab-content">
 
-            <!-- aba informações -->
+<!-- ------------------------------------- aba informações ------------------------------------------------------ -->
               <div class="tab-pane active" role="taappanel" id="info">
             <div class="row artista_row">
-                <h2>Diretores</h2><hr>
+                <h2>Diretores</h2><hr>  <!-- --------Linha um Diretores ------------------>
                 {% for dir in dirAleatorio[0:6] %}
                     <div class="col-sm-2">
-                        <img src="{{dir.foto}}" class="img-responsive img-rounded">
-                         <div class="artista_item">
-                             <h4>{{dir.nome}}</h4>
-                         </div>
+                        <img src="{{dir.foto}}" class="img-responsive img-rounded ">
+                        <div class="artista_item">
+                            <h4>{{dir.nome}}</h4>
+                        </div>
                     </div>
                 {% endfor %}
             </div>
             <!-- Linha dois -->
             <div class="row artista_row">
-                <h2>Escritores</h2><hr>
+                <h2>Escritores</h2><hr>  <!-- --------Linha um Escritores ------------------>
                 {% for esc in escAleatorio[0:6] %}
                     <div class="col-sm-2">
                         <img src="{{esc.foto}}" class="img-responsive img-rounded">
@@ -270,13 +277,17 @@
                       <h3>Diretores</h3><hr>
                       <table>
                           <tr>
-                              <th>Nome</th>
-                              <th>Nascionalidade</th>
+                              <th><b>Nome</b></th>
+                              <th><b>Nascionalidade</b></th>
+                              <th><b>Data nascimento</b></th>
+                              <th><b>excluir</b></th>
                           </tr>
                             {% for dir in diretores %}
                                <tr>
                                    <td>{{dir.nome}}</td>
                                    <td>{{dir.nascionalidade}}</td>
+                                   <td>{{dir.datanascimento}}</td>
+                                   <td><a href="excluiDiretor?iddiretor={{dir.iddiretor}}" class="glyphicon glyphicon-trash"></a></td>
                                </tr>
                           {% endfor%}
                       </table>
@@ -286,13 +297,17 @@
                       <h3>Escritores</h3><hr>
                       <table>
                           <tr>
-                              <th>Nome</th>
-                              <th>Nascionalidade</th>
+                              <th><b></b>Nome</b></th>
+                              <th><b>Nascionalidade</b></th>
+                              <th><b>Data nascimento</b></th>
+                              <th><b>excluir</b></th>
                           </tr>
                             {% for esc in escritores %}
                                <tr>
                                    <td>{{esc.nome}}</td>
                                    <td>{{esc.nascionalidade}}</td>
+                                   <td>{{esc.datanascimento}}</td>
+                                   <td><a href="excluiEscritor?idescritor={{esc.idescritor}}" class="glyphicon glyphicon-trash"></a></td>
                                </tr>
                           {% endfor%}
                       </table>
@@ -317,7 +332,7 @@
                                             </select>
                                             <div class="form-group">
                                                 <label>Nome: </label>
-                                                <input type="text" name="nome" class="form-control input-lg" required>
+                                                <input type="text" name="nome" class="form-control input-lg" placeholder="informe o nome" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Data de nascimento: </label>
@@ -325,11 +340,12 @@
                                             </div>
                                             <div class="form-group">
                                                 <label>Nascionalidade: </label>
-                                                <input type="text" name="nascionalidade" class="form-control input-lg" required>
+                                                <input type="text" name="nascionalidade" class="form-control input-lg" placeholder="informe a nascionalidade... ex: Brasília, Brasil " required>
                                             </div>
                                             <div class="form-group">
                                                 <label>foto</label>
-					                            <input type="text" name="foto" placeholder="Utilize http://goo.gl/ para reduzir o link">
+					                            <input type="text" name="foto" value="https://goo.gl/uN4oga">
+                                                <i>Utilize http://goo.gl/ para reduzir o link</i>
                                             </div>
                                         </div>
                                         </div>
@@ -378,51 +394,43 @@
 
                         <div class="media-body">
                             <p>{{net.noticia}}</p>
+                            <a href="excluirNoticia?idnetflix={{net.idnetflix}}" class="glyphicon glyphicon-trash"><i>excluir</i></a>
                         </div>
                     </li>
-<!-- ------------------------------------------ MODAL---------------------------------------------- -->
-
-                <!-- Janela -->
-                <form class="modal fade" id="janelaNETFLIX">
-
-                  <div class="modal-dialog modal-lg">
-                    <div class="modal-content">
-
-                      <!-- cabecalho -->
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">
-                          <span>&times;</span>
-                        </button>
-                      </div>
-
-                      <!-- Corpo -->
-                      <div class="modal-body">
-                          <a type="button" data-toggle="modal" data-target="#janelaNETFLIX" data-toggle="modal">
-                              <img src="{{net.foto}}" class=" img-rounded">
-                          </a>
-                          <h4>{{ net.noticia }}</h4>
-
-                      </div>
-
-                      <!-- rodape -->
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">
-                          Close
-                        </button>
-
-
-                        <a href="excluiNoticia?idnetflix={{net.idnetflix}}" type="submit" class="btn btn-danger">
-                          Excluir
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-<!-- -----------------------------------------// MODAL ESCRITOR---------------------------------------------- -->
-                    {% endfor %}
+                  {% endfor %}
                 </ul>
             </div>
           </div>
+
+          <br /><br /><br /><br /><br />
+           <div class="container">
+            <div class="row">
+                <form action="cadastrarNoticia" class="form-group">
+                     <div class="row">
+                         <div class="col-md-12">
+                             <div class="form-group">
+                                 <label>Imagem: </label>
+                                 <input class="textarea" type="text" name="foto" value="https://goo.gl/kmgWbG" placeholder="Utilize http://goo.gl/ para reduzir o link">
+                             </div>
+                             <div class="form-group">
+                                 <label>Noticia: </label>
+                                 <textarea class="form-control" name="noticia" required ></textarea>
+                             </div>
+                           <button type="submit" class="btn btn-success btn-lg">submeter</button>
+                         </div>
+                     </div>
+                </form>
+
+            </div>
+          </div>
+
+
+
+
+
+
+
+
 
           </div>
       </section>

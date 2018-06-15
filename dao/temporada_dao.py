@@ -134,11 +134,12 @@ def buscaIdSerieTemporada(file):
 
     return series
 
-def buscaTemporadaV2(file, idserie):
+def buscaTemporadaV2(file, idator):
 
     connection, cursor = connection_dao.get_connection(file)
-    query = f"select temporada.ano as 'ano', serie.nome as 'serie', temporada.banner as 'banner' from temporada, serie " \
-            f"where serie.idserie = temporada.idserie and temporada.idserie = {idserie};"
+    query = f"select temporada.ano as 'ano', serie.nome as 'serie', temporada.banner as 'banner', serie.idserie as 'idserie', temporada.idtemporada as 'idtemporada' " \
+            f"from temporada, serie, trabalhos " \
+            f"where serie.idserie = temporada.idserie and trabalhos.idtemporada = temporada.idtemporada and trabalhos.idator = '{idator}';"
 
     cursor.execute(query)
     data = cursor.fetchall()
@@ -147,7 +148,9 @@ def buscaTemporadaV2(file, idserie):
     for tmp in data:
         _tmp = temporada2_model.TemporadaV2(tmp[0],
                                             tmp[1],
-                                            tmp[2])
+                                            tmp[2],
+                                            tmp[3],
+                                            tmp[4])
         tempAno.append(_tmp)
 
     return tempAno

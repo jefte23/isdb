@@ -133,3 +133,20 @@ td, th {
 tr:nth-child(even) {
     background-color: #dddddd;
 }
+
+div.wrapper {
+  position: relative;
+}
+div.description {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  display: none;
+  background-color: black;
+  font-family: 'tahoma';
+  font-size: 15px;
+  color: white;
+}
+div.description_content {
+  padding: 10px;
+}

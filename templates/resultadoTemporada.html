@@ -99,8 +99,8 @@
 									</tr>
 
 									<tr>
-										<td> <img src="{{ temp.banner }}" height="50" width="70"></td>
-										<td> {{ temp.ano }} </td>
+                                        <td> <a href="temporada?idserie={{temp.idserie}}&idtemporada={{temp.idtemporada}}"><img src="{{ temp.banner }}" height="50" width="70"></a></td>
+                                        <td> <a href="temporada?idserie={{temp.idserie}}&idtemporada={{temp.idtemporada}}">{{ temp.ano }} </a> </td>
 										<td> {{ temp.sinopse }} </td>
 									</tr>
 										{% endif %}

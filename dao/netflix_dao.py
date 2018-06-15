@@ -19,3 +19,24 @@ def netflixAleatoria(file):
 
 
     return netflix
+
+#----------------------------------------------------------------------------#
+
+def cadastraNoticia(file, noticia, foto):
+
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"INSERT INTO isdb.netflix  ( noticia, foto) VALUES ('{noticia}', '{foto}');"
+    cursor.execute(query)
+    connection.commit()
+
+#----------------------------------------------------------------------------#
+
+def excluiNoticia(file, idnetflix):
+
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"DELETE FROM isdb.netflix WHERE idnetflix = '{idnetflix}'"
+    cursor.execute(query)
+    connection.commit()
+
