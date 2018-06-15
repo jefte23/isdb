@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>ISDB - Séries, NETFLIX e Celebridades</title>
+      <link rel="icon" href="../static/imgs/favicon.ico" type="image/x-icon">
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+    <!-- Fonte -->
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="../static/css/estilo.css" rel="stylesheet">
+
+  </head>
+  <body data-spy="scroll" data-target=".menu-navegacao" data-offset="100">
+
+              <div class="row artista_row">
+                {% for temp in temporadas %}
+                    <div class="col-sm-2">
+                        <img src={{temp.banner}} class="img-responsive">
+                         <div class="artista_item">
+                             <h4>{{temp.ano}}</h4>
+                             <h4>{{temp.serie}}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+      <!-- Rodape -->
+    <footer id="rodape">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-2">
+            <span class="img-logo">ISDB</span>
+          </div>
+            <div class="col-md-8">
+                <ul class="nav">
+                    <div class="col-md-2">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/facebook.png"></a></li>
+                    </div>
+                    <div class="col-md-2">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/twitter.png"></a></li>
+                    </div>
+                    <div class="col-md-1">
+                        <li class="item-rede-social"><a href=""><img src="../static/imgs/instagram.png"></a></li>
+                    </div>
+                </ul>
+            </div>
+
+            <div class="col-md-2 text-right nav">
+                <small>Desenvolvido por:</small><br/>
+                <strong>Jefté Alves Lira de Araujo</strong>
+            </div>
+
+        </div><!-- /row -->
+      </div>
+    </footer>
+
+<!-- ------------------------------- // barra de informações gerais --------------------------------------- -->
+
+<!-- ------------------------------------------------------------------------------------------------------ -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+      <script src="../static/js/bootstrap.min.js"></script>
+      <script src="../static/js/jquery-3.3.1.min.js" type="text/javascript"></script>
+
+  </body>
+</html>
