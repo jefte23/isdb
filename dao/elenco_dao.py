@@ -117,10 +117,8 @@ def elencoTemporada(file, idserie):
 
     return trabalhos
 
-
-
-
 #----------------------------------------------------------------------------#
+
 def get_elencoSerie(file, idtemp):
     connection, cursor = connection_dao.get_connection(file)
 
@@ -162,6 +160,7 @@ def excluir_ator(file, idator):
     connection.commit()
 
 #----------------------------------------------------------------------------#
+
 def excluiTrabalho(file, idserie):
     connection, cursor = connection_dao.get_connection(file)
 
@@ -169,8 +168,26 @@ def excluiTrabalho(file, idserie):
     cursor.execute(query)
     connection.commit()
 
+#----------------------------------------------------------------------------#
+
+def excluiTrabalhoIdTemporada(file, idtemporada):
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"DELET FROM isdb.trabalhos where idserie = '{idtemporada}'"
+    cursor.execute(query)
+    connection.commit()
 
 #----------------------------------------------------------------------------#
+
+def excluiTrabalhoV2(file, idator, idserie, idtemporada):
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"DELET FROM isdb.trabalhos where idator='{idator}' and idserie='{idserie}' and idtemporada = '{idtemporada}';"
+    cursor.execute(query)
+    connection.commit()
+
+#----------------------------------------------------------------------------#
+
 def atualizar_ator(file, idator, nome, datanascimento, nascionalidade, foto):
 
     connection, cursor = connection_dao.get_connection(file)
@@ -180,3 +197,31 @@ def atualizar_ator(file, idator, nome, datanascimento, nascionalidade, foto):
             f"foto) = {foto}' WHERE idator = '{idator}'"
     cursor.execute(query)
     connection.commit()
+
+#----------------------------------------------------------------------------#
+
+def buscaAtor(file, palavraChave):
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"SELECT * FROM isdb.ator" \
+            f" WHERE upper(nome) like upper('%{palavraChave}%') or upper(biografia) like upper('%{palavraChave}%') or upper(nascionalidade) like upper('%{palavraChave}%');"
+
+    cursor.execute(query)
+
+    data = cursor.fetchall()
+
+    atores = []
+    for ator in data:
+        atr = elenco_model.Ator(ator[0],
+                                ator[1],
+                                ator[2],
+                                ator[3],
+                                ator[4],
+                                ator[5])
+
+        atores.append(atr)
+
+    return atores
+
+#----------------------------------------------------------------------------#
+

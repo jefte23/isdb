@@ -1,6 +1,6 @@
 from control import app, mysql
 from flask import render_template, request
-from dao import serie_dao, elenco_dao, temporada_dao, episodeo_dao, diretor_dao, escritor_dao, banner_dao
+from dao import serie_dao, elenco_dao, temporada_dao, episodeo_dao, diretor_dao, escritor_dao, banner_dao, netflix_dao
 
 @app.route('/cadastrarDirecao')
 def cadastrarDirecao():
@@ -35,3 +35,45 @@ def cadastrarDirecao():
     return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
                            banner = banner, diretores = diretores, escritores = escritores,
                            escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+
+@app.route('/excluiEscritor')
+def excluiEscritor():
+
+    idescritor = request.args.get('idescritor')
+
+    escritor_dao.excluir_escritor(mysql, idescritor)
+
+    seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
+    elencoAleatorio = elenco_dao.get_atoresAleatorio(mysql)
+    banner = banner_dao.bannerAleatorio(mysql)
+    dirAleatorio = diretor_dao.diretorAleatorio(mysql)
+    escAleatorio = escritor_dao.escritorAleatorios(mysql)
+    diretores = diretor_dao.get_diretores(mysql)
+    escritores = escritor_dao.get_escritores(mysql)
+    netflix = netflix_dao.netflixAleatoria(mysql)
+
+    return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
+                           banner = banner, diretores = diretores, escritores = escritores,
+                           escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+
+
+@app.route('/excluiDiretor')
+def excluiDiretor():
+
+    iddiretor = request.args.get('iddiretor')
+
+    diretor_dao.excluir_diretor(mysql, iddiretor)
+
+    seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
+    elencoAleatorio = elenco_dao.get_atoresAleatorio(mysql)
+    banner = banner_dao.bannerAleatorio(mysql)
+    dirAleatorio = diretor_dao.diretorAleatorio(mysql)
+    escAleatorio = escritor_dao.escritorAleatorios(mysql)
+    diretores = diretor_dao.get_diretores(mysql)
+    escritores = escritor_dao.get_escritores(mysql)
+    netflix = netflix_dao.netflixAleatoria(mysql)
+
+    return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
+                           banner = banner, diretores = diretores, escritores = escritores,
+                           escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+

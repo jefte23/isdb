@@ -31,30 +31,42 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="" class="navbar-brand img-logo"></a>
+                <a href="index.html" class="navbar-brand img-logo"></a>
             </div>
-            
+
             <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
 
-                <form class="navbar-form navbar-right" role="search">
+
+                <form action="/buscaValores" class="navbar-form navbar-right">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-search"></span>
+                            <input type="text" name="palavrachave" class="form-control" placeholder="Busca...">
                         </span>
-                            <input type="text" class="form-control" placeholder="Busca...">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary">Buscar</button>
+                        <span class="input-group-addon">
+                            <select name="tipo" class="input-group-addon">
+                                <option value="art">Artista</option>
+                                <option value="ser">Serie</option>
+                                <option value="dir">Diretor</option>
+                                <option value="esc">Escritor</option>
+                                <option value="gen">Genero</option>
+                                <option value="ano">Ano</option>
+                            </select>
+                        </span>
+
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
                         </span>
                     </div>
                 </form>
-                
+
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#page-top"></a></li>
-                    <li><a class="/" href="/">voltar</a></li>
                     <li><a class="" href="series">Séries</a></li>
                     <li><a class="" href="artistas">Artistas</a></li>
-                    <li><a class="" href="netflix.html">Netflix</a></li>
+                    <li><a class="" href="index.html">Voltar</a></li>
                 </ul>
+
+
             </div>
         </div>
       </nav>
@@ -130,7 +142,7 @@
 
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li class="active"><a href="#A" role="tab" data-toggle="tab">A ... F</a></li>
-                                        <li><a href="#B" role="tab" data-toggle="tab">E ... L</a></li>
+                                        <li><a href="#B" role="tab" data-toggle="tab">G ... L</a></li>
                                         <li><a href="#C" role="tab" data-toggle="tab">M ... R</a></li>
                                         <li><a href="#D" role="tab" data-toggle="tab">S ... X</a></li>
                                         <li><a href="#E" role="tab" data-toggle="tab">Y ... Z ...</a></li>

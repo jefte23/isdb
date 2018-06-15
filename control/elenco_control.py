@@ -16,7 +16,6 @@ def artistas():
 @app.route('/temporada1',methods=["GET", "POST"])
 def temporada1():
     idserie = request.args.get('idserie')
-    print(idserie)
 
     lista = temporada_dao.get_temporadas(mysql, idserie)
     ano  = []
@@ -33,30 +32,23 @@ def artista():
     idator = request.args.get('idator')
     artista = elenco_dao.get_ator(mysql, idator)
     trabalhos = elenco_dao.get_trabalho(mysql, idator)
+    todaSeries = serie_dao.get_series(mysql)
 
     series = []
     for tr in trabalhos:
         sr = serie_dao.get_serie(mysql, tr.idserie)
-        print(tr.idator)
+        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
 
         series.append(sr)
 
-    todaSeries = serie_dao.get_series(mysql)
-
-    if request.method == 'POST':
-        idserie = request.form['idserie']
-        print(idserie)
-        temporadas = temporada_dao.get_temporadas(mysql, idserie)
-
-        for temp in temporadas:
-            print(temp.ano)
-        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas, t = "<h1>tete<</h1>")
+    if series == []:
+        temporadas = []
+        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
     else:
-        temporadas  = temporada_dao.get_temporadas(mysql, 0)
+        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
+        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
-
-    return render_template("artista.html", series = series, artista = artista, todaSeries = todaSeries, temporadas = temporadas)
 
 
 @app.route('/cadastrarArtista')
@@ -91,32 +83,25 @@ def cadastroTrabalho():
 
     elenco_dao.get_cadastraTrabalho(mysql, idator, idserie, idtemporada)
 
-    print("idator", idator)
-    print("idserie", idserie)
-    print("idtemporada", idtemporada)
+    idator = request.args.get('idator')
     artista = elenco_dao.get_ator(mysql, idator)
     trabalhos = elenco_dao.get_trabalho(mysql, idator)
+    todaSeries = serie_dao.get_series(mysql)
 
     series = []
     for tr in trabalhos:
         sr = serie_dao.get_serie(mysql, tr.idserie)
-        print(tr.idator)
 
         series.append(sr)
 
-    todaSeries = serie_dao.get_series(mysql)
-
-    if request.method == 'POST':
-        idserie = request.form['idserie']
-        print(idserie)
-        temporadas = temporada_dao.get_temporadas(mysql, idserie)
-
-        for temp in temporadas:
-            print(temp.ano)
-        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas, t = "<h1>tete<</h1>")
+    if series == []:
+        temporadas = []
+        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
     else:
-        temporadas  = temporada_dao.get_temporadas(mysql, 0)
+        temporadas = temporada_dao.buscaTemporadaV2(mysql, sr.idserie)
+        return render_template("artista.html", series=series, artista=artista, todaSeries=todaSeries, temporadas=temporadas)
 
 
-    return render_template("artista.html", series = series, artista = artista, todaSeries = todaSeries, temporadas = temporadas)
+
+

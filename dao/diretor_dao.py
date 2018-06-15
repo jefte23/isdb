@@ -105,3 +105,24 @@ def excluir_diretor(file, iddiretor):
     connection.commit()
 
 #----------------------------------------------------------------------------#
+
+def buscaDiretor(file, palavraChave):
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"SELECT * FROM isdb.diretor WHERE upper(nome) like upper('%{palavraChave}%') or upper(nascionalidade) like upper('%{palavraChave}%');"
+
+    cursor.execute(query)
+
+    data = cursor.fetchall()
+
+    diretor = []
+    for dir in data:
+        _diretor = diretor_model.Diretor(dir[0],
+                                         dir[1],
+                                         dir[2],
+                                         dir[3],
+                                         dir[4])
+
+        diretor.append(_diretor)
+
+    return diretor

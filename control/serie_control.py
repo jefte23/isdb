@@ -1,6 +1,8 @@
 from control import app, mysql
 from flask import render_template, request
 from dao import serie_dao, elenco_dao, temporada_dao, episodeo_dao, diretor_dao, escritor_dao, banner_dao, netflix_dao
+from model import avaliacao_model
+
 
 @app.route('/')
 def index():
@@ -29,10 +31,10 @@ def series():
 def serie():
 
     idserie = request.args.get('idserie')
-
     serie = serie_dao.get_serie(mysql, idserie)
     trabalho = elenco_dao.elencoTemporada(mysql, idserie)
     temporada = temporada_dao.get_temporadas(mysql, idserie)
+    avaliacao = serie_dao.buscaAvaliacao(mysql, idserie)
 
     elenco = []
     for el in trabalho:
@@ -40,7 +42,7 @@ def serie():
 
         elenco.append(atores)
 
-    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada)
+    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada, avaliacao = avaliacao)
 
 @app.route('/cadastraserie')
 def cadastraserie():
@@ -109,6 +111,58 @@ def cadastraSerie():
     todaSeries = serie_dao.get_series(mysql)
 
     return render_template("series.html", series = seriesAleatorias, todaSeries = todaSeries)
+
+@app.route('/excluirSerie')
+def excluirSerie():
+
+    idserie = request.args.get('idserie')
+
+    serie_dao.excluiAvaliação(mysql, idserie)
+    serie_dao.excluir_serie(mysql, idserie)
+
+    seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
+    elencoAleatorio = elenco_dao.get_atoresAleatorio(mysql)
+    banner = banner_dao.bannerAleatorio(mysql)
+    dirAleatorio = diretor_dao.diretorAleatorio(mysql)
+    escAleatorio = escritor_dao.escritorAleatorios(mysql)
+    diretores = diretor_dao.get_diretores(mysql)
+    escritores = escritor_dao.get_escritores(mysql)
+    netflix = netflix_dao.netflixAleatoria(mysql)
+
+    return render_template("index.html", series = seriesAleatorias, elenco = elencoAleatorio,
+                           banner = banner, diretores = diretores, escritores = escritores,
+                           escAleatorio = escAleatorio, dirAleatorio = dirAleatorio, netflix = netflix)
+
+
+@app.route('/cadastrarComentario')
+def cadastrarComentario():
+
+    nome = request.args.get('nome')
+    avatar = request.args.get('avatar')
+    avaliacao = request.args.get('avaliacao')
+    idserie = request.args.get('idserie')
+
+    print(idserie)
+
+    serie_dao.cadastraAvaliacao(mysql, idserie, nome, avaliacao, avatar)
+
+    serie = serie_dao.get_serie(mysql, idserie)
+    trabalho = elenco_dao.elencoTemporada(mysql, idserie)
+    temporada = temporada_dao.get_temporadas(mysql, idserie)
+    avaliacao = serie_dao.buscaAvaliacao(mysql, idserie)
+
+    elenco = []
+    for el in trabalho:
+        atores = elenco_dao.get_ator(mysql, el.idator)
+
+        elenco.append(atores)
+
+    return render_template("serie.html", serie = serie, elenco = elenco, temporada = temporada, avaliacao = avaliacao)
+
+
+
+
+
 
 
 

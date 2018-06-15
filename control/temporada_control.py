@@ -99,9 +99,10 @@ def excluirEpisodio ():
 def excluirTemporada():
 
     idtemporada = request.args.get('idtemporada')
-    elenco_dao.excluiTrabalho(mysql, idtemporada)
-    temporada_dao.excluiTemporada(mysql, idtemporada)
 
+    elenco_dao.excluiTrabalhoIdTemporada(mysql, idtemporada)
+
+    temporada_dao.excluiTemporada(mysql, idtemporada)
 
     seriesAleatorias = serie_dao.get_seriesAleatoria(mysql)
     todaSeries = serie_dao.get_series(mysql)

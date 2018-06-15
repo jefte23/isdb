@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <link href="../static/css/estilo.css" rel="stylesheet">
       
@@ -32,12 +33,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="#" class="navbar-brand img-logo"></a>
+                <a href="/" class="navbar-brand img-logo"></a>
             </div>
             
             <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
 
-                <form action="buscaValores" class="navbar-form navbar-right" role="search">
+
+                <form action="/buscaValores" class="navbar-form navbar-right">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
                             <input type="text" name="palavrachave" class="form-control" placeholder="Busca...">
@@ -54,7 +56,7 @@
                         </span>
 
                         <span class="input-group-addon">
-                            <button type="button" class="btn btn-primary">Buscar</button>
+                            <button type="submit" class="btn btn-primary">Buscar</button>
                         </span>
                     </div>
                 </form>
@@ -66,7 +68,7 @@
                     <li><a class="" href="#Diretores/Roteiristas">Diretores / Roteiristas</a></li>
                     <li><a class="" href="#netflix">Netflix</a></li>
                 </ul>
-                
+
 
             </div>
         </div>
@@ -214,6 +216,8 @@
       
 <!-- ---------------------------------- Diretores/Roteiristas -------------------------------------------- -->
 
+<!-- ---------------------------------- Diretores/Roteiristas -------------------------------------------- -->
+
       <section id="Diretores/Roteiristas">
           <div class="container">
             <div class="row">
@@ -241,8 +245,8 @@
                     <div class="col-sm-2">
                         <img src="{{dir.foto}}" class="img-responsive img-rounded">
                          <div class="artista_item">
-                            <h4>{{dir.nome}}</h4>
-                        </div>
+                             <h4>{{dir.nome}}</h4>
+                         </div>
                     </div>
                 {% endfor %}
             </div>
@@ -350,7 +354,6 @@
           </div>
 
       </section>
-
 <!-- -------------------------------- // Diretores/Roteiristas ------------------------------------------ -->
 
 
@@ -370,13 +373,52 @@
                     {% for net in netflix [0:6]%}
                     <li class="media">
                         <a href="#" class="pull-left">
-                            <img src="{{net.foto}}" style="width:64px; height:64px;"/>
+                            <img src="{{net.foto}}" height="70" width="90"/>
                         </a>
 
                         <div class="media-body">
                             <p>{{net.noticia}}</p>
                         </div>
                     </li>
+<!-- ------------------------------------------ MODAL---------------------------------------------- -->
+
+                <!-- Janela -->
+                <form class="modal fade" id="janelaNETFLIX">
+
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                      <!-- cabecalho -->
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                          <span>&times;</span>
+                        </button>
+                      </div>
+
+                      <!-- Corpo -->
+                      <div class="modal-body">
+                          <a type="button" data-toggle="modal" data-target="#janelaNETFLIX" data-toggle="modal">
+                              <img src="{{net.foto}}" class=" img-rounded">
+                          </a>
+                          <h4>{{ net.noticia }}</h4>
+
+                      </div>
+
+                      <!-- rodape -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                          Close
+                        </button>
+
+
+                        <a href="excluiNoticia?idnetflix={{net.idnetflix}}" type="submit" class="btn btn-danger">
+                          Excluir
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+<!-- -----------------------------------------// MODAL ESCRITOR---------------------------------------------- -->
                     {% endfor %}
                 </ul>
             </div>
@@ -409,7 +451,7 @@
                     </div>
                 </ul>
             </div>
-            
+
             <div class="col-md-2 text-right nav">
                 <small>Desenvolvido por:</small><br/>
                 <strong>Jefté Alves Lira de Araujo</strong>

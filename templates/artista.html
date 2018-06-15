@@ -19,18 +19,11 @@
     <link href="../static/css/estilo.css" rel="stylesheet">
 
       <script>
-
-
           $(document).ready(function(){
-
             $("#idserie").click( function(){
                 clearOptions()
-
                 var idserie = $("#idserie option:selected" ).val();
-
-
                      $.getJSON("http://127.0.0.1:5000/temporada1?idserie="+idserie, function( data ) {
-
                           for( i in data){
                             $('#idtemporada').append($('<option>', {
                                 value:data[i].substring(5),
@@ -38,20 +31,15 @@
                             }));
                            }//for
                       });//getJSON
-
           });//click
-
         });//ready
-
           function clearOptions(){
                   var select = document.getElementById('idtemporada');
                   var length = select.options.length;
                   for (i = 0; i < length; i++) {
                      select.options[i] = null;
                   }
-
         }
-
       </script>
   </head>
   <body data-spy="scroll" data-target=".menu-navegacao" data-offset="100">
@@ -66,30 +54,41 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="" class="navbar-brand img-logo"></a>
+                <a href="index.html" class="navbar-brand img-logo"></a>
             </div>
 
             <div class="collapse navbar-collapse menu-navegacao" id="menu-navegacao">
 
-                <form class="navbar-form navbar-right" role="search">
+
+                <form action="/buscaValores" class="navbar-form navbar-right">
                     <div class="input-group input-group-sm">
                         <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-search"></span>
+                            <input type="text" name="palavrachave" class="form-control" placeholder="Busca...">
                         </span>
-                            <input type="text" class="form-control" placeholder="Busca...">
-                        <span class="input-group-btn">
-                            <button type="button" class="btn btn-primary">Buscar</button>
+                        <span class="input-group-addon">
+                            <select name="tipo" class="input-group-addon">
+                                <option value="art">Artista</option>
+                                <option value="ser">Serie</option>
+                                <option value="dir">Diretor</option>
+                                <option value="esc">Escritor</option>
+                                <option value="gen">Genero</option>
+                                <option value="ano">Ano</option>
+                            </select>
+                        </span>
+
+                        <span class="input-group-addon">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
                         </span>
                     </div>
                 </form>
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#page-top"></a></li>
-                    <li><a class="" href="">voltar</a></li>
                     <li><a class="" href="series">Séries</a></li>
                     <li><a class="" href="artistas">Artistas</a></li>
-                    <li><a class="" href="netflix.html">Netflix</a></li>
                 </ul>
+
+
             </div>
         </div>
       </nav>
@@ -117,7 +116,7 @@
                              <h4>Data de Nascimento: {{artista.datanascimento}}</h4>
                              <h4>Nascionalidade: {{artista.nascionalidade}}</h4>
                              <h3>Biografia: </h3>
-                             <h4 align="left">{{artista.biografia}}</h4>
+                             <h4>{{artista.biografia}}</h4>
                         </div>
                     </div>
                 </div>
@@ -129,13 +128,26 @@
                     <div class="col-sm-2">
                         <a href="serie?idserie={{serie.idserie}}"><img src={{serie.banner}} class="img-responsive"></a>
                          <div class="artista_item">
-                            <h4>{{serie.nome}}</h4>
+                             <a href="serie?idserie={{serie.idserie}}"><h4><i>{{serie.nome}}</i></h4></a>
                         </div>
                     </div>
                 {% endfor %}
             </div>
 
-              </div>
+<!--
+              <div class="row artista_row">
+                {% for temp in temporadas %}
+                    <div class="col-sm-2">
+                        <img src={{temp.banner}} class="img-responsive">
+                         <div class="artista_item">
+                             <h4>{{temp.ano}}</h4>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+-->
+
+            </div>
 
           </div>
 
@@ -161,8 +173,7 @@
                         <div class="row cadastro">
                             <div class="col-xs-12">
 
-
-                                <form class="form-group" action="/cadastroTrabalho">
+                            <form class="form-group" action="/cadastroTrabalho">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -194,11 +205,12 @@
                                             <div class="alert alert-success">Envio realizado!</div>
                                         </div>
                                         -->
-                                        <br />
-                                        <div class="col-sm-12">
-                                            <button type="submit" class="btn btn-success btn-lg">Cadastra</button>
-                                        </div>
-                                    </div>
+                                        <br /><br /><br />
+                                     <div class="col-sm-8">
+                                            <button type="submit" class="btn btn-success btn-lg">Cadastra Trabalho</button>
+
+                                     </div>
+                                           </div>
                                         </div>
                                     </div>
                                 </form>

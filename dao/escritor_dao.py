@@ -96,13 +96,33 @@ def atualizar_diretor(file, idescritor, nome, datanascimento, nascionalidade, fo
 
 #----------------------------------------------------------------------------#
 
-def excluir_diretor(file, idescritor):
+def excluir_escritor(file, idescritor):
 
     connection, cursor = connection_dao.get_connection(file)
 
-    query = f"DELET FROM isdb.escritor where idescritor = '{idescritor}'"
+    query = f"DELETE FROM isdb.escritor where idescritor = '{idescritor}'"
 
     cursor.execute(query)
     connection.commit()
 
 #----------------------------------------------------------------------------#
+
+def buscaEscritor(file, palavraChave):
+    connection, cursor = connection_dao.get_connection(file)
+
+    query = f"SELECT * FROM isdb.escritor WHERE upper(nome) like upper('%{palavraChave}%') or upper(nascionalidade) like upper('%{palavraChave}%')";
+
+    cursor.execute(query)
+    data = cursor.fetchall()
+
+    escritor = []
+    for esc in data:
+        _escritor = escritor_model.Escritor (esc[0],
+                                             esc[1],
+                                             esc[2],
+                                             esc[3],
+                                             esc[4])
+
+        escritor.append(_escritor)
+
+    return escritor
